@@ -19,7 +19,11 @@
 
 #include <iq_module_communication.hpp>
 
- // USER SETABLE VALUES HERE---------------------------------------------------
+// USER SETABLE VALUES HERE---------------------------------------------------
+// ESP32 Serial2 pins
+#define PIN_SERIAL_RX 16
+#define PIN_SERIAL_TX 17
+
 // Sets the maximum speed (in rad/s)
 const float kSpeed = 50.0f;
 // Sets the velocity increment size (in rad/s/100ms)
@@ -33,7 +37,7 @@ PropellerMotorControlClient prop(0);
 
 void setup() {
   // Initialize the Serial peripheral for motor controller
-  ser.begin(115200);
+  ser.begin(115200, SERIAL_8N1, PIN_SERIAL_RX, PIN_SERIAL_TX);
 
   // The motor must already be powered on and booted up
   //   for these setup messages to be received.
