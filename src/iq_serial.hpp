@@ -38,6 +38,12 @@ class IqSerial{
     {
       my_serial_->begin(baud);
     }
+
+    // Custom begin function for ESP32
+    void begin(unsigned long baud, uint32_t config, int8_t rxPin, int8_t txPin)
+    {
+      my_serial_->begin(baud, config, rxPin, txPin);
+    }
     
     void begin()
     {
