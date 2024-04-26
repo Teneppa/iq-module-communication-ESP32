@@ -20,7 +20,10 @@
 
 #include <iq_module_communication.hpp>
 
- // USER SETABLE VALUES HERE---------------------------------------------------
+// USER SETABLE VALUES HERE---------------------------------------------------
+#define PIN_SERIAL_RX 16
+#define PIN_SERIAL_TX 17
+
 // Sets the angle to go to in radians
 const float kAngle = 12.0f*PI;
 // Sets the trajectory time in seconds
@@ -34,13 +37,13 @@ const float kConstantVelocity = -PI;
 // Make an IqSerial object using Serial0 (same as Serial)
 // Every board is different.  Ensure the Serial number you are using is correct
 // and of the HardwareSerial class.
-IqSerial ser(Serial);
+IqSerial ser(Serial2);
 // Make a MultiTurnAngleControlClient to interface with a motor module (ID 0)
 MultiTurnAngleControlClient angle(0);
 
 void setup() {
   // Initialize the Serial peripheral for motor controller
-  ser.begin(115200);
+  ser.begin(115200, SERIAL_8N1, PIN_SERIAL_RX, PIN_SERIAL_TX);
 
   // The motor must already be powered on and booted up
   //   for these setup messages to be received.
